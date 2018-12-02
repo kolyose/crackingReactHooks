@@ -1,8 +1,7 @@
 import { useContext } from 'react';
-import { IdContext } from '../idFactory';
-
+import { ComponentIdContext } from '../componentId';
 
 export default () => {
-  const { id } = useContext(IdContext);
+  const id = useContext(ComponentIdContext);
   return id;
-}
+};
