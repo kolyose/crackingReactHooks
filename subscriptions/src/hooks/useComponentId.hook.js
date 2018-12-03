@@ -1,7 +1,11 @@
-import { useContext } from 'react';
-import { ComponentIdContext } from '../componentId';
+import { useMemo } from 'react';
 
-export default () => {
-  const id = useContext(ComponentIdContext);
-  return id;
+let _id = 0;
+
+export default (update = false) => {
+  if (update) {
+    _id++;
+  }
+
+  return useMemo(() => _id, []);
 };

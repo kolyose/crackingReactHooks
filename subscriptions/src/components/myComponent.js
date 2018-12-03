@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useComponentId from '../hooks/useComponentId.hook';
 import useSubscriptions from '../hooks/useSubscriptions.hook';
 
 const MyComponent = () => {
-  const id = useComponentId();
+  const [issueNewId, setIssueNewId] = useState(true);
+  const id = useComponentId(issueNewId);
+
   const [input, setInput] = useState('');
   const [subscriptions, setSubscriptions] = useState('');
   const { addSubscription, removeSubscription, getSubscriptions } = useSubscriptions();
+
+  useEffect(() => {
+    if (issueNewId) setIssueNewId(false);
+  }, []);
 
   function updateSubscriptions() {
     setSubscriptions(getSubscriptions());
