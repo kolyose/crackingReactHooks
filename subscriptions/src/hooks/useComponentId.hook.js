@@ -8,6 +8,6 @@ export default (update = false) => {
   }
 
   const id = useMemo(() => _id, []);
-  console.log(`useComponentId() -> id: ${id}`);
+
   return id;
 };
