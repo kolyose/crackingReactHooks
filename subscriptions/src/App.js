@@ -5,8 +5,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <MyComponent sources={['A', 'B', 'C']} />
-        <MyComponent sources={['1', '2', '3']} />
+        <React.ConcurrentMode>
+          <MyComponent sources={['A', 'B', 'C']} />
+        </React.ConcurrentMode>
       </div>
     );
   }

@@ -4,7 +4,7 @@ let subscriptionsByComponentId = {};
 
 export default source => {
   if (!source) return;
-
+  console.log('useSubscriptions()');
   const id = useComponentId();
 
   if (!subscriptionsByComponentId[id]) {

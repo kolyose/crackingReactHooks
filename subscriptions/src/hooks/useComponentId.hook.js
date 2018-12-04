@@ -7,5 +7,7 @@ export default (update = false) => {
     _id++;
   }
 
-  return useMemo(() => _id, []);
+  const id = useMemo(() => _id, []);
+  console.log(`useComponentId() -> id: ${id}`);
+  return id;
 };
