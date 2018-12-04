@@ -13,7 +13,7 @@ const MyComponent = ({ sources }) => {
   sources.forEach(source => {
     subscriptions = useSubscriptions(source);
   });
-  console.log(`subscriptions: ${subscriptions}`);
+  console.log(`subscriptions: ${Array.from(subscriptions)}`);
 
   useEffect(() => {
     console.log('useEffect()');
