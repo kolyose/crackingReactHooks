@@ -2,50 +2,36 @@ import React, { useState, useEffect } from 'react';
 import useComponentId from '../hooks/useComponentId.hook';
 import useSubscriptions from '../hooks/useSubscriptions.hook';
 
-const MyComponent = () => {
+const MyComponent = ({ sources }) => {
   const [issueNewId, setIssueNewId] = useState(true);
   const id = useComponentId(issueNewId);
 
-  const [input, setInput] = useState('');
-  const [subscriptions, setSubscriptions] = useState('');
-  const { addSubscription, removeSubscription, getSubscriptions } = useSubscriptions();
+  const [subscriptions, updateSubscriptions] = useState(
+    sources.map(source => useSubscriptions(source)),
+  );
 
   useEffect(() => {
     if (issueNewId) setIssueNewId(false);
   }, []);
 
-  function updateSubscriptions() {
-    setSubscriptions(getSubscriptions());
-  }
-
   return (
     <div>
       <h1>{`Component ${id}`}</h1>
-      <p>Subscribed to: {subscriptions}</p>
-      <input
-        value={input}
-        onChange={e => {
-          setInput(e.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          addSubscription(input);
-          updateSubscriptions();
-          setInput('');
-        }}
-      >
-        Subscribe
-      </button>
-      <button
-        onClick={() => {
-          removeSubscription(input);
-          updateSubscriptions();
-          setInput('');
-        }}
-      >
-        Unsubscribe
-      </button>
+      <p>
+        Subscribed to:{' '}
+        {subscriptions.reduce((list, { source }) => list.concat(source).concat(','), '')}
+      </p>
+      {subscriptions.map(({ source, unsubscribe }, index) => (
+        <button
+          key={index}
+          onClick={() => {
+            unsubscribe();
+            updateSubscriptions(subscriptions.filter((sub, i) => index !== i));
+          }}
+        >
+          {`Unsubscribe from ${source}`}
+        </button>
+      ))}
     </div>
   );
 };
