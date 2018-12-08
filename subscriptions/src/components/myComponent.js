@@ -1,24 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import useComponentId from '../hooks/useComponentId.hook';
+import React from 'react';
+import useComponentId, { issueNewId } from '../hooks/useComponentId.hook';
 import useSubscriptions from '../hooks/useSubscriptions.hook';
 
 const MyComponent = ({ sources }) => {
-  console.log('<MyComponent/>');
+  issueNewId();
 
-  const [issueNewId, setIssueNewId] = useState(true);
-  const id = useComponentId(issueNewId);
-  console.log(`id: ${id}`);
+  const id = useComponentId();
 
   let subscriptions;
   sources.forEach(source => {
     subscriptions = useSubscriptions(source);
   });
-  console.log(`subscriptions: ${Array.from(subscriptions)}`);
-
-  useEffect(() => {
-    console.log('useEffect()');
-    if (issueNewId) setIssueNewId(false);
-  }, []);
 
   return (
     <div>
