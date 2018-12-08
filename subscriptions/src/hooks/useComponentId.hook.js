@@ -1,10 +1,15 @@
 import { useState } from 'react';
 
-let _id = 0;
+let _id;
+resetId();
 
-export const issueNewId = () => {
+export function issueNewId() {
   _id++;
-};
+}
+
+export function resetId() {
+  _id = 0;
+}
 
 export default () => {
   const [id] = useState(_id);
