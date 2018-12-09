@@ -5,6 +5,7 @@ resetId();
 
 export function issueNewId() {
   _id++;
+  console.log(`issued id: ${_id}`);
 }
 
 export function resetId() {
@@ -13,5 +14,6 @@ export function resetId() {
 
 export default () => {
   const [id] = useState(_id);
+  console.log(`returned id: ${id}`);
   return id;
 };
